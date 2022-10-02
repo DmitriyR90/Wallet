@@ -1,6 +1,12 @@
-import Container from './Container/Container';
 import Header from './Header/Header';
+import { TransactionForm } from './TransactionForm/TransactionForm';
 
 export const App = () => {
-  return <Header></Header>;
+  return (
+    <>
+      <Header />
+
+      <TransactionForm />
+    </>
+  );
 };
