@@ -6,11 +6,12 @@ export const LabelInput = ({
   name,
   placeholder = null,
   value = '',
+  onInput
 }) => {
   return (
     <Label>
       <Title>{title}</Title>
-      <Input type={type} name={name} placeholder={placeholder} value={value} />
+      <Input type={type} name={name} placeholder={placeholder} value={value} onChange={onInput } />
     </Label>
   );
 };
