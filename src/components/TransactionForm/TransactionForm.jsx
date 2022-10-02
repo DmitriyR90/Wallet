@@ -1,34 +1,36 @@
-import { Form } from './TransactionForm.styled';
+import { Form, ButtonForm } from './TransactionForm.styled';
 import Container from './../Container/Container';
 import { Section } from './../Section/Section';
+import { LabelInput } from 'components/LabelInput/LabelInput';
+
 export const TransactionForm = () => {
   return (
     <Section>
       <Container>
         <Form>
-          <label class="label">
-            <span class="label-title">Дата</span>
-            <input type="date" name="date" />
-          </label>
-          <label class="label">
-            <span class="label-title">Час</span>
-            <input type="time" name="time" />
-          </label>
-          <label class="label">
-            <span class="label-title">Сума</span>
-            <input type="text" name="summ" placeholder="Вкажіть суму" />
-          </label>
-          <label class="label">
-            <span class="label-title">Валюта</span>
-            <input type="button" name="currency" value="UAH" />
-          </label>
-          <label class="label">
-            <span class="label-title">Коментар</span>
-            <input type="text" name="text" placeholder="Коментар..." />
-          </label>
-          <button type="submit" class="btn-form">
+          <LabelInput title={'Дата'} type={'date'} name={'date'} />
+          <LabelInput title={'Час'} type={'time'} name={'time'} />
+          <LabelInput
+            title={'Сума'}
+            type={'text'}
+            name={'summ'}
+            placeholder="Вкажіть суму"
+          />
+          <LabelInput
+            title={'Валюта'}
+            type={'button'}
+            name={'currency'}
+            value="UAH"
+          />
+          <LabelInput
+            title={'Коментар'}
+            type={'text'}
+            name={'comment'}
+            placeholder="Коментар..."
+          />
+          <ButtonForm type="submit" class="btn-form">
             Додати
-          </button>
+          </ButtonForm>
         </Form>
       </Container>
     </Section>

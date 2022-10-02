@@ -1,12 +1,7 @@
-import Header from './Header/Header';
-import { TransactionForm } from './TransactionForm/TransactionForm';
+import { MainPage } from './MainPage/MainPage';
 
 export const App = () => {
-  return (
-    <>
-      <Header />
-
-      <TransactionForm />
-    </>
-  );
+  return <>
+    <MainPage />
+  </>;
 };
