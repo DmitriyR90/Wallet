@@ -3,15 +3,15 @@ import Container from './../Container/Container';
 import { Button, Wrapper } from './NavButtons.styled';
 
 
-export const NavButtons = () => {
+export const NavButtons = ({ changePage }) => {
   return (
     <Section>
       <Container>
         <Wrapper>
-          <Button class="btn" type="button">
+          <Button type="button" onClick={() => changePage("expense")}>
             Всі витрати
           </Button>
-          <Button class="btn" type="button">
+          <Button type="button" onClick={() => changePage("income")}>
             Всі доходи
           </Button>
         </Wrapper>
