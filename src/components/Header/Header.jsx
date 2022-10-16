@@ -1,11 +1,16 @@
 // import Header from './Header.styled';
 import Container from '../Container/Container';
 
-const Header = () => {
+const Header = ({ title, onClick }) => {
   return (
     <header>
       <Container>
-        <h2>Журнал витрат</h2>
+        {onClick && (
+          <button type="button" onClick={onClick}>
+            Повернутися
+          </button>
+        )}
+        <h2>{title}</h2>
       </Container>
     </header>
   );

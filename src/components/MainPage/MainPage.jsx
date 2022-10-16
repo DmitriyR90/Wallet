@@ -7,14 +7,20 @@ import { useState } from 'react';
 export const MainPage = ({ changePage, addTransaction }) => {
   const [isOpenCategories, setisOpenCategories] = useState(false);
 
+  const toggleCategory = () => {
+    setisOpenCategories(prevState => !prevState);
+  };
 
-  return (
-isOpenCategories ? <Categories/> :
+  return isOpenCategories ? (
+    <Categories closeCategory={toggleCategory} />
+  ) : (
     <>
-      <Header />
-      <TransactionForm addTransaction={addTransaction} />
+      <Header title={'Журнал витрат'} />
+      <TransactionForm
+        addTransaction={addTransaction}
+        openCategory={toggleCategory}
+      />
       <NavButtons changePage={changePage} />
     </>
   );
 };
-

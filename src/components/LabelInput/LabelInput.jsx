@@ -8,6 +8,7 @@ export const LabelInput = ({
   value = '',
   onInput,
   checked,
+  onClick,
 }) => {
   return (
     <Label>
@@ -19,6 +20,7 @@ export const LabelInput = ({
         value={value}
         onChange={onInput}
         checked={checked}
+        onClick={onClick}
       />
     </Label>
   );
