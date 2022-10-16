@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // import { Component } from 'react';
 import { MainPage } from './MainPage/MainPage';
 import { TransactionHistoryPage } from './TransactionHistoryPage/TransactionHistoryPage';
@@ -12,9 +12,27 @@ export const App = () => {
     setActivePage(activePage);
   };
 
+  const addTransaction = transaction => {
+    const { transactionType } = transaction;
+
+    transactionType === 'income' &&
+      setIncome(prevState => [...prevState, transaction]);
+    transactionType === 'expense' &&
+      setExpense(prevState => [...prevState, transaction]);
+  };
+
+  useEffect(() => {
+    localStorage.setItem('income', JSON.stringify(income));
+  }, [income]);
+  useEffect(() => {
+    localStorage.setItem('expense', JSON.stringify(expense));
+  }, [expense]);
+
   return (
     <>
-      {activePage === 'main' && <MainPage changePage={changePage} />}
+      {activePage === 'main' && (
+        <MainPage changePage={changePage} addTransaction={addTransaction} />
+      )}
       {activePage === 'income' && (
         <TransactionHistoryPage changePage={changePage} />
       )}
