@@ -2,13 +2,12 @@ import { TransactionForm } from '../TransactionForm/TransactionForm';
 import { NavButtons } from '../NavButtons/NavButtons';
 import Header from '../Header/Header';
 
-export const MainPage = ({ changePage }) => {
-  
+export const MainPage = ({ changePage, addTransaction }) => {
   return (
     <>
       <Header />
-      <TransactionForm />
-      <NavButtons changePage={changePage}/>
+      <TransactionForm addTransaction={addTransaction} />
+      <NavButtons changePage={changePage} />
     </>
   );
 };
