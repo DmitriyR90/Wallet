@@ -13,7 +13,7 @@ const initialState = {
   category: 'Різне',
 };
 
-export const TransactionForm = ({ addTransaction }) => {
+export const TransactionForm = ({ addTransaction, openCategory }) => {
   const [form, setForm] = useState(initialState);
 
   const handleInput = ({ currentTarget }) => {
@@ -32,7 +32,8 @@ export const TransactionForm = ({ addTransaction }) => {
     addTransaction(form);
   };
 
-  const { date, time, summ, currency, comment, transactionType, category } = form;
+  const { date, time, summ, currency, comment, transactionType, category } =
+    form;
 
   return (
     <Section>
@@ -74,6 +75,7 @@ export const TransactionForm = ({ addTransaction }) => {
             name={'category'}
             value={category}
             onInput={handleInput}
+            onClick={openCategory}
           />
           <LabelInput
             title={'Сума'}
