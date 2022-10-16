@@ -10,6 +10,7 @@ const initialState = {
   currency: 'UAH',
   comment: '',
   transactionType: 'expense',
+  category: 'Різне',
 };
 
 export const TransactionForm = ({ addTransaction }) => {
@@ -31,7 +32,7 @@ export const TransactionForm = ({ addTransaction }) => {
     addTransaction(form);
   };
 
-  const { date, time, summ, currency, comment, transactionType } = form;
+  const { date, time, summ, currency, comment, transactionType, category } = form;
 
   return (
     <Section>
@@ -50,7 +51,7 @@ export const TransactionForm = ({ addTransaction }) => {
             type={'radio'}
             name={'transactionType'}
             value={'expense'}
-            onInput={this.handleInput}
+            onInput={handleInput}
             checked={'expense' === transactionType}
           />
           <LabelInput
@@ -58,14 +59,21 @@ export const TransactionForm = ({ addTransaction }) => {
             type={'date'}
             name={'date'}
             value={date}
-            onInput={this.handleInput}
+            onInput={handleInput}
           />
           <LabelInput
             title={'Час'}
             type={'time'}
             name={'time'}
             value={time}
-            onInput={this.handleInput}
+            onInput={handleInput}
+          />
+          <LabelInput
+            title={'Категорія'}
+            type={'button'}
+            name={'category'}
+            value={category}
+            onInput={handleInput}
           />
           <LabelInput
             title={'Сума'}
@@ -73,14 +81,14 @@ export const TransactionForm = ({ addTransaction }) => {
             name={'summ'}
             placeholder="Вкажіть суму"
             value={summ}
-            onInput={this.handleInput}
+            onInput={handleInput}
           />
           <LabelInput
             title={'Валюта'}
             type={'button'}
             name={'currency'}
             value={currency}
-            onInput={this.handleInput}
+            onInput={handleInput}
           />
           <LabelInput
             title={'Коментар'}
@@ -88,7 +96,7 @@ export const TransactionForm = ({ addTransaction }) => {
             name={'comment'}
             placeholder="Коментар..."
             value={comment}
-            onInput={this.handleInput}
+            onInput={handleInput}
           />
           <ButtonForm type="submit">Додати</ButtonForm>
         </Form>
