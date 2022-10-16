@@ -11,12 +11,15 @@ export class TransactionForm extends Component {
     summ: '',
     currency: 'UAH',
     comment: '',
+    transactionType: 'expense',
   };
 
   handleInput = ({ currentTarget }) => {
+    const { setState } = this;
+
     const { name, value } = currentTarget;
 
-    this.setState({ [name]: value });
+    setState.call(this, { [name]: value });
   };
 
   handleSubmit = e => {
@@ -25,12 +28,28 @@ export class TransactionForm extends Component {
   };
 
   render() {
-    const { date, time, summ, currency, comment } = this.state;
+    const { date, time, summ, currency, comment, transactionType } = this.state;
 
     return (
       <Section>
         <Container>
           <Form onSubmit={this.handleSubmit}>
+            <LabelInput
+              title={'Дохід'}
+              type={'radio'}
+              name={'transactionType'}
+              value={'income'}
+              onInput={this.handleInput}
+              checked={'income' === transactionType}
+            />
+            <LabelInput
+              title={'Витрати'}
+              type={'radio'}
+              name={'transactionType'}
+              value={'expense'}
+              onInput={this.handleInput}
+              checked={'expense' === transactionType}
+            />
             <LabelInput
               title={'Дата'}
               type={'date'}

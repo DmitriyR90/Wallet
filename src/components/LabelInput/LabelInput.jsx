@@ -6,12 +6,20 @@ export const LabelInput = ({
   name,
   placeholder = null,
   value = '',
-  onInput
+  onInput,
+  checked,
 }) => {
   return (
     <Label>
       <Title>{title}</Title>
-      <Input type={type} name={name} placeholder={placeholder} value={value} onChange={onInput } />
+      <Input
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        value={value}
+        onChange={onInput}
+        checked={checked}
+      />
     </Label>
   );
 };
