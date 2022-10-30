@@ -2,7 +2,7 @@ import { Form, ButtonForm } from './TransactionForm.styled';
 import Container from './../Container/Container';
 import { Section } from './../Section/Section';
 import { LabelInput } from 'components/LabelInput/LabelInput';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const initialState = {
@@ -14,18 +14,21 @@ const initialState = {
   category: 'Різне',
 };
 
-export const TransactionForm = ({ addTransaction, openCategory }) => {
+export const TransactionForm = ({
+  addTransaction,
+  openCategory,
+  newCategory,
+}) => {
   const [form, setForm] = useState(initialState);
   const navigate = useNavigate();
   const { transType } = useParams();
 
-
   const handleInput = ({ currentTarget }) => {
     const { name, value } = currentTarget;
-    
+
     if (name === 'transType') {
-      navigate(`/transaction/${value}`, {replace: true});
-      return
+      navigate(`/transaction/${value}`, { replace: true });
+      return;
     }
 
     setForm(prevState => {
@@ -38,12 +41,15 @@ export const TransactionForm = ({ addTransaction, openCategory }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    
-    addTransaction({...form,  transType}); 
+
+    addTransaction({ ...form, transType });
   };
 
-  const { date, time, summ, currency, comment, category } =
-    form;
+  const { date, time, summ, currency, comment, category } = form;
+
+  useEffect(() => {
+    setForm(prevState => ({ ...prevState, category: newCategory }));
+  }, [newCategory]);
 
   return (
     <Section>
