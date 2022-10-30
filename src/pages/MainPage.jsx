@@ -1,8 +1,8 @@
-import { TransactionForm } from '../TransactionForm/TransactionForm';
-import { NavButtons } from '../NavButtons/NavButtons';
-import Header from '../Header/Header';
-import { Categories } from 'components/Categories/Categories';
 import { useState } from 'react';
+import { TransactionForm } from '../components/TransactionForm/TransactionForm';
+import { NavButtons } from '../components/NavButtons/NavButtons';
+import Header from '../components/Header/Header';
+import { Categories } from 'components/Categories/Categories';
 
 export const MainPage = ({ addTransaction }) => {
   const [isOpenCategories, setisOpenCategories] = useState(false);
