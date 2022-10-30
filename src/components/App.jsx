@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 // import { Component } from 'react';
-import { MainPage } from './MainPage/MainPage';
-import { TransactionHistoryPage } from './TransactionHistoryPage/TransactionHistoryPage';
-import { Routes, Route } from 'react-router-dom';
+import { MainPage } from '../pages/MainPage';
+import { TransactionHistoryPage } from '../pages/TransactionHistoryPage/TransactionHistoryPage';
+import { Routes, Route, Navigate } from 'react-router-dom';
+
 
 export const App = () => {
   const [activePage, setActivePage] = useState('main');
@@ -14,11 +15,11 @@ export const App = () => {
   // };
 
   const addTransaction = transaction => {
-    const { transactionType } = transaction;
+    const { transType } = transaction;
 
-    transactionType === 'income' &&
+    transType === 'income' &&
       setIncome(prevState => [...prevState, transaction]);
-    transactionType === 'expense' &&
+    transType === 'expense' &&
       setExpense(prevState => [...prevState, transaction]);
   };
 
@@ -32,36 +33,12 @@ export const App = () => {
   return (
     <Routes>
       <Route
-        path="/transaction"
+        path="/transaction/:transType"
         element={<MainPage addTransaction={addTransaction} />}
       />
-      <Route path="/history/:type" element={<TransactionHistoryPage />} />
+      <Route path="/history/:transType" element={<TransactionHistoryPage />} />
+      <Route path='*' element={<Navigate to='/transaction/expense' /> }/>
     </Routes>
   );
 };
 
-/*
-export class App extends Component {
- 
-  state = {
-    activePage: "main",
-  }
-
-  changePage = (activePage="main") => {
-    this.setState({
-      activePage: activePage
-    })
-  }
-
-  render() {
-    const { activePage } = this.state
-    return <>
-
-      {activePage === "main" && <MainPage changePage={this.changePage} />}
-      {activePage === "income" && <TransactionHistoryPage changePage={this.changePage}/>}
-      {activePage === "expense" && <TransactionHistoryPage changePage={this.changePage}/>}
-  
-    </>;
-    }
-};
-*/

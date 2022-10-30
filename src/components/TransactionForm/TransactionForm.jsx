@@ -3,21 +3,31 @@ import Container from './../Container/Container';
 import { Section } from './../Section/Section';
 import { LabelInput } from 'components/LabelInput/LabelInput';
 import { useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+
 const initialState = {
   date: '',
   time: '',
   summ: '',
   currency: 'UAH',
   comment: '',
-  transactionType: 'expense',
   category: 'Різне',
 };
 
 export const TransactionForm = ({ addTransaction, openCategory }) => {
   const [form, setForm] = useState(initialState);
+  const navigate = useNavigate();
+  const { transType } = useParams();
+
 
   const handleInput = ({ currentTarget }) => {
     const { name, value } = currentTarget;
+    
+    if (name === 'transType') {
+      navigate(`/transaction/${value}`, {replace: true});
+      return
+    }
+
     setForm(prevState => {
       return {
         ...prevState,
@@ -28,11 +38,11 @@ export const TransactionForm = ({ addTransaction, openCategory }) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-
-    addTransaction(form);
+    
+    addTransaction({...form,  transType}); 
   };
 
-  const { date, time, summ, currency, comment, transactionType, category } =
+  const { date, time, summ, currency, comment, category } =
     form;
 
   return (
@@ -42,18 +52,18 @@ export const TransactionForm = ({ addTransaction, openCategory }) => {
           <LabelInput
             title={'Дохід'}
             type={'radio'}
-            name={'transactionType'}
+            name={'transType'}
             value={'income'}
             onInput={handleInput}
-            checked={'income' === transactionType}
+            checked={'income' === transType}
           />
           <LabelInput
             title={'Витрати'}
             type={'radio'}
-            name={'transactionType'}
+            name={'transType'}
             value={'expense'}
             onInput={handleInput}
-            checked={'expense' === transactionType}
+            checked={'expense' === transType}
           />
           <LabelInput
             title={'Дата'}

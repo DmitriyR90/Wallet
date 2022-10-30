@@ -1,9 +1,9 @@
+import { useNavigate } from 'react-router-dom';
 import Container from 'components/Container/Container';
 import Header from 'components/Header/Header';
 import { Section } from 'components/Section/Section';
 import s from './TransactionHistoryPage.module.css';
 import sprite from '../../assets/sprite.svg';
-import { useNavigate } from 'react-router-dom';
 
 export const TransactionHistoryPage = () => {
   const navigate = useNavigate();
