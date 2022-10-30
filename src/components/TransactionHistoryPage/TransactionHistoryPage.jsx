@@ -3,13 +3,18 @@ import Header from 'components/Header/Header';
 import { Section } from 'components/Section/Section';
 import s from './TransactionHistoryPage.module.css';
 import sprite from '../../assets/sprite.svg';
+import { useNavigate } from 'react-router-dom';
 
-export const TransactionHistoryPage = ({ changePage }) => {
-  const goBack = () => changePage();
+export const TransactionHistoryPage = () => {
+  const navigate = useNavigate();
+
+  const goBack = () => {
+    navigate(-1, { replace: true });
+  };
 
   return (
     <>
-      <Header title={TransactionHistoryPage} onClick={goBack} />
+      <Header title={`TransactionHistoryPage`} onClick={goBack} />
 
       {/* <svg>
         <use href="../sprite.svg#icon-arrow-left2"></use>

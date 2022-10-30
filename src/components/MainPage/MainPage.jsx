@@ -4,7 +4,7 @@ import Header from '../Header/Header';
 import { Categories } from 'components/Categories/Categories';
 import { useState } from 'react';
 
-export const MainPage = ({ changePage, addTransaction }) => {
+export const MainPage = ({ addTransaction }) => {
   const [isOpenCategories, setisOpenCategories] = useState(false);
 
   const toggleCategory = () => {
@@ -20,7 +20,7 @@ export const MainPage = ({ changePage, addTransaction }) => {
         addTransaction={addTransaction}
         openCategory={toggleCategory}
       />
-      <NavButtons changePage={changePage} />
+      <NavButtons />
     </>
   );
 };

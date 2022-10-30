@@ -1,4 +1,5 @@
-import styled from "styled-components";
+import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 export const Wrapper = styled.div`
   display: flex;
@@ -7,7 +8,7 @@ export const Wrapper = styled.div`
   gap: 1rem;
 `;
 
-export const Button = styled.button`
+export const Button = styled(Link)`
   width: 40%;
   padding: 2.4rem 0;
   font-size: 1.2rem;
@@ -16,4 +17,6 @@ export const Button = styled.button`
   background: rgb(130, 116, 116);
   color: rgb(251, 251, 251);
   cursor: pointer;
+  text-decoration: none;
+  text-align: center;
 `;
