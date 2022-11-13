@@ -70,7 +70,10 @@ export const App = () => {
           />
         }
       />
-      <Route path="/history/:transType" element={<TransactionHistoryPage />} />
+      <Route
+        path="/history/:transType"
+        element={<TransactionHistoryPage income={income} expense={expense} />}
+      />
       <Route path="*" element={<Navigate to="/transaction/expense" />} />
     </Routes>
   );
