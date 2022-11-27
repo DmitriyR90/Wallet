@@ -3,14 +3,19 @@ import { useEffect, useState } from 'react';
 import { MainPage } from '../pages/MainPage';
 import { TransactionHistoryPage } from '../pages/TransactionHistoryPage/TransactionHistoryPage';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { RegisterPage } from 'pages/RegisterPage';
+import { LoginPage } from './../pages/LoginPage';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectIsAuth } from './../redux/auth/authSelectors';
+import { refreshUser } from './../redux/auth/authOperations';
 
 const getFromLS = (key, initialValue) => {
   return JSON.parse(localStorage.getItem(key)) ?? initialValue;
 };
 
 export const App = () => {
-  const [income, setIncome] = useState(getFromLS('income', []));
-  const [expense, setExpense] = useState(getFromLS('expense', []));
+  const dispatch = useDispatch();
+  const isAuth = useSelector(selectIsAuth);
   const [incomeCategories, setIncomeCategories] = useState(
     getFromLS('incomeCategories', [])
   );
@@ -27,22 +32,6 @@ export const App = () => {
     }
   };
 
-  const addTransaction = transaction => {
-    const { transType } = transaction;
-
-    transType === 'income' &&
-      setIncome(prevState => [...prevState, transaction]);
-    transType === 'expense' &&
-      setExpense(prevState => [...prevState, transaction]);
-  };
-
-  useEffect(() => {
-    localStorage.setItem('income', JSON.stringify(income));
-  }, [income]);
-  useEffect(() => {
-    localStorage.setItem('expense', JSON.stringify(expense));
-  }, [expense]);
-
   const categories = {
     income: incomeCategories,
     expense: expenseCategories,
@@ -58,23 +47,33 @@ export const App = () => {
     );
   }, [expenseCategories]);
 
+  useEffect(() => {
+    isAuth && dispatch(refreshUser());
+  }, [dispatch, isAuth]);
+
   return (
     <Routes>
-      <Route
-        path="/transaction/:transType"
-        element={
-          <MainPage
-            addTransaction={addTransaction}
-            addCategory={addCategory}
-            categories={categories}
+      {isAuth ? (
+        <>
+          <Route
+            path="/transaction/:transType"
+            element={
+              <MainPage addCategory={addCategory} categories={categories} />
+            }
           />
-        }
-      />
-      <Route
-        path="/history/:transType"
-        element={<TransactionHistoryPage income={income} expense={expense} />}
-      />
-      <Route path="*" element={<Navigate to="/transaction/expense" />} />
+          <Route
+            path="/history/:transType"
+            element={<TransactionHistoryPage />}
+          />
+          <Route path="*" element={<Navigate to="/transaction/expense" />} />
+        </>
+      ) : (
+        <>
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </>
+      )}
     </Routes>
   );
 };
